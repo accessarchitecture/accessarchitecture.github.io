@@ -12,7 +12,7 @@ https://accessarchitecture.github.io
 
 ## Status
 
-This repository currently hosts the public landing page for the field. Additional papers, frameworks, and documentation will be added as the field develops.
+The site presents the field's foundational distinction, initial working vocabulary, and first publication: *Ability Is Not Access*.
 
 Developed by M. Ian Niad
 Part of the Ashfires research ecosystem.

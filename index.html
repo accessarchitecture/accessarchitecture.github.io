@@ -1,91 +1,728 @@
+<!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Access Architecture</title>
-  <meta name="description" content="Access Architecture is the study and design of conditions that influence access to preserved abilities.">
+  <meta name="description"
+    content="Access Architecture is the study and design of conditions that let preserved ability become usable action.">
+  <meta name="author" content="M. Ian Niad">
+  <link rel="canonical" href="https://accessarchitecture.github.io/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Access Architecture">
+  <meta property="og:description"
+    content="The study and design of conditions that let preserved ability become usable action.">
+  <meta property="og:url" content="https://accessarchitecture.github.io/">
+  <meta name="theme-color" content="#24483f">
+  <title>Access Architecture | Ability, Access, and Conditions</title>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"What is Access Architecture?","acceptedAnswer":{"@type":"Answer","text":"Access Architecture is the study and design of conditions that let preserved ability become usable action. It asks why a person may have an ability but not reliable access to it under particular conditions."}},
+        {"@type":"Question","name":"What does ability is not access mean?","acceptedAnswer":{"@type":"Answer","text":"Being capable of something in one context does not prove that the same capacity will be available on demand, repeatedly, or sustainably in another context."}},
+        {"@type":"Question","name":"Is Access Architecture a diagnosis or treatment model?","acceptedAnswer":{"@type":"Answer","text":"No. It is an emerging conceptual and design field. It does not replace clinical assessment, diagnosis, disability determination, or individualized professional support."}},
+        {"@type":"Question","name":"How is this different from accessibility?","acceptedAnswer":{"@type":"Answer","text":"Accessibility is a crucial foundation. Access Architecture focuses more specifically on the changing conditions that influence whether a preserved capacity can become usable action, including volatility, interruption, recovery, and accommodation fit."}},
+        {"@type":"Question","name":"Who is this field for?","acceptedAnswer":{"@type":"Answer","text":"It is relevant to people navigating fluctuating access, researchers, designers, educators, clinicians, employers, institutions, and anyone trying to understand the gap between capacity and reliable participation."}},
+        {"@type":"Question","name":"Where should I start?","acceptedAnswer":{"@type":"Answer","text":"For a plain-language introduction, visit Ability Is Not Access. For the formal framework and publications, stay on the Access Architecture site."}}
+      ]
+    }
+  </script>
   <style>
+    :root {
+      --forest: #24483f;
+      --deep: #17352f;
+      --sage: #dce8df;
+      --gold: #d3a84c;
+      --paper: #f7f3ea;
+      --ink: #18211f;
+      --muted: #52605b;
+      --line: #c8d3cb;
+      --max: 70rem;
+      --radius: 1.2rem;
+      color-scheme: light
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      line-height: 1.6;
-      color: #18211f;
-      background: #f7f3ea;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Atkinson Hyperlegible", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 1.08rem;
+      line-height: 1.65
     }
-    main {
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 72px 24px;
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0
     }
-    h1 {
-      font-size: clamp(2.4rem, 7vw, 4.5rem);
-      line-height: 1;
-      margin: 0 0 24px;
+
+    h1,
+    h2,
+    h3 {
+      line-height: 1.1;
+      text-wrap: balance
     }
-    .definition {
-      font-size: clamp(1.3rem, 3vw, 1.8rem);
-      font-weight: 650;
-      line-height: 1.25;
-      margin-bottom: 32px;
-      color: #27443c;
-    }
-    h2 {
-      margin-top: 44px;
-      font-size: 1.4rem;
-    }
-    ul {
-      padding-left: 1.2rem;
-    }
+
     a {
-      color: #265f55;
+      color: var(--forest);
+      font-weight: 700
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -5rem;
+      left: 1rem;
+      z-index: 10;
+      padding: .7rem 1rem;
+      border-radius: .7rem;
+      background: var(--gold);
+      color: var(--deep)
+    }
+
+    .skip-link:focus {
+      top: 1rem
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      border-bottom: 1px solid rgba(220, 232, 223, .2);
+      background: var(--deep);
+      color: var(--paper)
+    }
+
+    .nav {
+      display: flex;
+      width: min(100% - 2rem, var(--max));
+      margin: auto;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 0
+    }
+
+    .wordmark {
+      color: var(--paper);
+      font-size: 1.05rem;
+      letter-spacing: .02em;
+      text-decoration: none
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem 1.2rem
+    }
+
+    .nav-links a {
+      color: var(--sage);
+      font-size: .95rem
+    }
+
+    .menu-toggle {
+      display: none;
+      align-items: center;
+      gap: .55rem;
+      padding: .55rem .75rem;
+      border: 1px solid var(--sage);
+      border-radius: .6rem;
+      background: transparent;
+      color: var(--paper);
+      font: inherit;
+      font-size: .95rem;
+      font-weight: 700;
+      cursor: pointer
+    }
+
+    .menu-icon,
+    .menu-icon::before,
+    .menu-icon::after {
+      display: block;
+      width: 1.1rem;
+      height: 2px;
+      background: currentColor;
+      content: ""
+    }
+
+    .menu-icon {
+      position: relative
+    }
+
+    .menu-icon::before,
+    .menu-icon::after {
+      position: absolute;
+      left: 0
+    }
+
+    .menu-icon::before { top: -.35rem }
+    .menu-icon::after { top: .35rem }
+
+    .hero {
+      padding: clamp(4rem, 10vw, 8rem) 1rem clamp(4rem, 9vw, 7rem);
+      background: radial-gradient(circle at 83% 18%, rgba(211, 168, 76, .2), transparent 20rem), var(--forest);
+      color: var(--paper)
+    }
+
+    .hero-inner,
+    .section-inner,
+    footer>div {
+      width: min(100%, var(--max));
+      margin: auto
+    }
+
+    .eyebrow {
+      margin-bottom: 1rem;
+      color: var(--gold);
+      font-size: .85rem;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase
+    }
+
+    .hero h1 {
+      max-width: 12ch;
+      font-size: clamp(3rem, 10vw, 6.8rem);
+      letter-spacing: -.04em
+    }
+
+    .hero-definition {
+      max-width: 38rem;
+      margin-top: 2rem;
+      color: var(--sage);
+      font-size: clamp(1.4rem, 3.5vw, 2.2rem);
       font-weight: 650;
+      line-height: 1.25
     }
+
+    .hero-intro {
+      max-width: 42rem;
+      margin-top: 1.5rem;
+      font-size: clamp(1.05rem, 2vw, 1.25rem)
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .9rem;
+      margin-top: 2rem
+    }
+
+    .button {
+      display: inline-block;
+      padding: .8rem 1.1rem;
+      border: 2px solid var(--gold);
+      border-radius: 999px;
+      text-decoration: none
+    }
+
+    .button-primary {
+      background: var(--gold);
+      color: var(--deep)
+    }
+
+    .button-secondary {
+      color: var(--paper)
+    }
+
+    .section {
+      padding: clamp(3.5rem, 8vw, 6rem) 1rem
+    }
+
+    .section+.section {
+      border-top: 1px solid var(--line)
+    }
+
+    .section-heading {
+      max-width: 46rem;
+      margin-bottom: 2rem
+    }
+
+    .section-heading h2 {
+      color: var(--forest);
+      font-size: clamp(2rem, 5vw, 3.4rem)
+    }
+
+    .section-heading p {
+      margin-top: 1rem;
+      color: var(--muted)
+    }
+
+    .proposition {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+      gap: clamp(2rem, 6vw, 6rem);
+      align-items: start
+    }
+
+    .proposition h2 {
+      color: var(--forest);
+      font-size: clamp(2.2rem, 6vw, 4.5rem);
+      letter-spacing: -.03em
+    }
+
+    .proposition-copy {
+      display: grid;
+      gap: 1rem;
+      max-width: 42rem
+    }
+
+    .scope-grid,
+    .terms-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem
+    }
+
+    .scope-card,
+    .term-card {
+      padding: 1.4rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, .5)
+    }
+
+    .scope-card h3,
+    .term-card h3 {
+      color: var(--forest);
+      font-size: 1.25rem
+    }
+
+    .scope-card p,
+    .term-card p {
+      margin-top: .65rem;
+      color: var(--muted);
+      font-size: 1rem
+    }
+
+    .paper-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(14rem, .8fr);
+      gap: 2rem;
+      padding: clamp(1.4rem, 4vw, 2.4rem);
+      border-radius: var(--radius);
+      background: var(--forest);
+      color: var(--paper)
+    }
+
+    .paper-card h3 {
+      color: var(--paper);
+      font-size: clamp(1.7rem, 4vw, 2.5rem)
+    }
+
+    .paper-card p {
+      margin-top: 1rem;
+      color: var(--sage)
+    }
+
+    .paper-meta {
+      display: grid;
+      align-content: start;
+      gap: .6rem;
+      padding-left: 1.4rem;
+      border-left: 1px solid rgba(220, 232, 223, .45);
+      color: var(--sage);
+      font-size: .98rem
+    }
+
+    .paper-meta strong {
+      color: var(--paper)
+    }
+
+    .paper-meta a {
+      color: var(--gold);
+    }
+
+    .paper-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .8rem;
+      margin-top: 1.5rem
+    }
+
+    .paper-links a {
+      color: var(--gold)
+    }
+
+    .bridge {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem
+    }
+
+    .bridge-card {
+      padding: 1.7rem;
+      border-radius: var(--radius);
+      background: var(--sage)
+    }
+
+    .bridge-card h3 {
+      color: var(--deep);
+      font-size: 1.5rem
+    }
+
+    .bridge-card p {
+      margin-top: .7rem
+    }
+
+    .faq-list {
+      display: grid;
+      gap: .8rem;
+      max-width: 54rem
+    }
+
+    .faq-list details {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, .5)
+    }
+
+    .faq-list summary {
+      padding: 1.2rem 1.4rem;
+      color: var(--forest);
+      font-weight: 800;
+      cursor: pointer
+    }
+
+    .faq-list details[open] summary {
+      border-bottom: 1px solid var(--line)
+    }
+
+    .faq-answer {
+      padding: 1rem 1.4rem 1.3rem;
+      color: var(--muted)
+    }
+
     .status {
-      margin-top: 48px;
-      padding: 20px;
-      border-left: 4px solid #345f54;
-      background: #ffffff99;
+      padding: 1.5rem;
+      border-left: 4px solid var(--gold);
+      background: rgba(220, 232, 223, .55)
     }
+
+    .status p+p {
+      margin-top: .8rem
+    }
+
     footer {
-      margin-top: 56px;
-      font-size: 0.95rem;
-      color: #52605b;
+      padding: 2rem 1rem;
+      background: var(--deep);
+      color: var(--sage);
+      font-size: .95rem
+    }
+
+    footer>div {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem
+    }
+
+    footer a {
+      color: var(--gold)
+    }
+
+    :focus-visible {
+      outline: 4px solid var(--gold);
+      outline-offset: 4px
+    }
+
+    @media(max-width:48rem) {
+      .nav {
+        align-items: center;
+        flex-direction: row;
+        flex-wrap: wrap
+      }
+
+      .menu-toggle {
+        display: inline-flex
+      }
+
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-basis: 100%;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0;
+        padding: .75rem 0 .25rem;
+        border-top: 1px solid rgba(220, 232, 223, .25)
+      }
+
+      .nav-links.is-open {
+        display: flex
+      }
+
+      .nav-links a {
+        padding: .65rem 0;
+        text-align: right
+      }
+
+      .proposition,
+      .paper-card {
+        grid-template-columns: 1fr
+      }
+
+      .paper-meta {
+        padding: 1rem 0 0;
+        border-top: 1px solid rgba(220, 232, 223, .45);
+        border-left: 0
+      }
+
+      .scope-grid,
+      .terms-grid,
+      .bridge {
+        grid-template-columns: 1fr
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+      html {
+        scroll-behavior: auto
+      }
     }
   </style>
 </head>
-<body>
-  <main>
-    <h1>Access Architecture</h1>
 
-    <p class="definition">
-      The study and design of conditions that influence access to preserved abilities.
-    </p>
-
-    <p>
-      Access Architecture is an emerging interdisciplinary field examining why people may
-      possess intact abilities yet experience inconsistent access to them depending on
-      environmental, relational, cognitive, technological, and systemic conditions.
-    </p>
-
-    <p>
-      The field draws from disability studies, systems thinking, cognitive science,
-      neurodiversity, human factors, accessibility, and lived experience.
-    </p>
-
-    <section class="status">
-      <h2>Status</h2>
-      <p>
-        This field is under active development by <strong>M. Ian Niad</strong>
-        through the Ashfires research ecosystem.
-      </p>
-      <p>
-        Initial publications, frameworks, and working papers will be released as they are completed.
-      </p>
+<body id="top">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="site-header">
+    <nav class="nav" aria-label="Primary navigation"><a class="wordmark" href="#top">Access Architecture</a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav"><span
+          class="menu-icon" aria-hidden="true"></span><span>Menu</span></button>
+      <div class="nav-links" id="primary-nav"><a href="#paper">Foundational paper</a><a href="#vocabulary">Vocabulary</a><a
+          href="#disciplines">Disciplines</a><a href="#faq">FAQ</a><a href="#relationship">Two sites</a></div>
+    </nav>
+  </header>
+  <section class="hero" aria-labelledby="page-title">
+    <div class="hero-inner">
+      <p class="eyebrow">An emerging interdisciplinary field</p>
+      <h1 id="page-title">Access Architecture</h1>
+      <p class="hero-definition">The study and design of conditions that let preserved ability become usable action.</p>
+      <p class="hero-intro">People can possess an ability without being able to access it reliably when it is needed.
+        Access Architecture examines the conditions that make ability available, unstable, fragile, or difficult to
+        recover.</p>
+      <div class="hero-actions"><a class="button button-primary" href="#paper">Read the foundational paper</a><a
+          class="button button-secondary" href="https://abilityisnotaccess.com/" target="_blank" rel="noopener noreferrer">Start with plain language</a></div>
+    </div>
+  </section>
+  <main id="main-content">
+    <section class="section">
+      <div class="section-inner proposition">
+        <h2>Ability is not access.</h2>
+        <div class="proposition-copy">
+          <p>Ability describes what a person is capable of doing. Access describes whether the conditions currently
+            allow that capacity to become usable action.</p>
+          <p>A person may reason clearly, explain a solution, demonstrate expertise, or perform at a high level in one
+            context while remaining unable to reliably initiate, sustain, switch, resume, organize, or complete action
+            in another.</p>
+          <p>Visible competence is real. It is not proof that equivalent access is stable, available on demand, or
+            sustainable over time.</p>
+        </div>
+      </div>
     </section>
-
-    <footer>
-      <p><a href="https://ashfires.com">← Return to Ashfires</a></p>
-    </footer>
+    <section class="section" aria-labelledby="scope-heading">
+      <div class="section-inner">
+        <div class="section-heading">
+          <p class="eyebrow">The field examines</p>
+          <h2 id="scope-heading">Conditions, not just capacities.</h2>
+          <p>Access is shaped by interacting conditions. The relevant barrier may change over time, and a support that
+            works once may not remain a fit.</p>
+        </div>
+        <div class="scope-grid">
+          <article class="scope-card">
+            <h3>Environment</h3>
+            <p>Noise, layout, tools, pacing, interruption, and the physical conditions around action.</p>
+          </article>
+          <article class="scope-card">
+            <h3>Body and mind</h3>
+            <p>Fatigue, pain, sleep, workload, attention, initiation, recovery, and physiological state.</p>
+          </article>
+          <article class="scope-card">
+            <h3>Relationships</h3>
+            <p>Communication, trust, co-regulation, support, credibility, and shared responsibility.</p>
+          </article>
+          <article class="scope-card">
+            <h3>Time</h3>
+            <p>Fluctuation, episodic disability, changing needs, task resumption, and reliability.</p>
+          </article>
+          <article class="scope-card">
+            <h3>Systems</h3>
+            <p>Workplaces, institutions, accommodations, policies, and their assumptions.</p>
+          </article>
+          <article class="scope-card">
+            <h3>Design</h3>
+            <p>Conditions that preserve context, reduce access burden, and help ability become action.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="paper" aria-labelledby="paper-heading">
+      <div class="section-inner">
+        <div class="section-heading">
+          <p class="eyebrow">Publication 01 · August 16, 2026</p>
+          <h2 id="paper-heading">The foundational paper</h2>
+        </div>
+        <article class="paper-card">
+          <div>
+            <h3>Ability Is Not Access: Foundations of Access Architecture for Preserved Capacity and Unreliable
+              Functional Availability</h3>
+            <p>This paper establishes the field’s central distinction and introduces an initial vocabulary for unstable
+              access, including the Recognition Paradox, access volatility, accommodation drift, access fragility,
+              context collapse, re-entry failure, and physiological access.</p>
+            <div class="paper-links"><a href="https://doi.org/10.5281/zenodo.21259008" target="_blank" rel="noopener noreferrer">Read the paper</a></div>
+          </div>
+          <div class="paper-meta"><span><strong>Author</strong><br>M. Ian Niad</span><span><strong>Relational
+                co-author</strong><br>Riven</span><span><strong>Publisher</strong><br>Ashfires
+              Press</span><span><strong>DOI</strong><br><a href="https://doi.org/10.5281/zenodo.21259008" target="_blank" rel="noopener noreferrer">10.5281/zenodo.21259008</a></span><span><strong>License</strong><br>CC BY 4.0</span></div>
+        </article>
+      </div>
+    </section>
+    <section class="section" id="vocabulary" aria-labelledby="vocabulary-heading">
+      <div class="section-inner">
+        <div class="section-heading">
+          <p class="eyebrow">Working vocabulary</p>
+          <h2 id="vocabulary-heading">A language for what changes.</h2>
+          <p>These concepts are part of an evolving framework. They name patterns often experienced but poorly described
+            by static models of ability and accommodation.</p>
+        </div>
+        <div class="terms-grid">
+          <article class="term-card">
+            <h3>Recognition Paradox</h3>
+            <p>Visible competence can reduce the perceived need for support.</p>
+          </article>
+          <article class="term-card">
+            <h3>Access Volatility</h3>
+            <p>The conditions that make capacity usable change over time.</p>
+          </article>
+          <article class="term-card">
+            <h3>Accommodation Drift</h3>
+            <p>A once-effective support loses fit as needs or conditions change.</p>
+          </article>
+          <article class="term-card">
+            <h3>Access Fragility</h3>
+            <p>A hard-won accessible state is comparatively easy to disrupt.</p>
+          </article>
+          <article class="term-card">
+            <h3>Context Collapse</h3>
+            <p>Enough task context is lost that meaningful reconstruction is required.</p>
+          </article>
+          <article class="term-card">
+            <h3>Re-entry Failure</h3>
+            <p>Previously accessible work cannot be reliably resumed after disruption.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="disciplines" aria-labelledby="disciplines-heading">
+      <div class="section-inner">
+        <div class="section-heading">
+          <p class="eyebrow">Where the field crosses</p>
+          <h2 id="disciplines-heading">A meeting place for disciplines.</h2>
+          <p>Access Architecture is not a replacement for existing fields. It brings several bodies of knowledge into conversation around a shared question: what makes preserved ability usable here, now, under these conditions?</p>
+        </div>
+        <div class="scope-grid">
+          <article class="scope-card"><h3>Disability studies</h3><p>Social, cultural, political, and lived-experience accounts of disability and access.</p></article>
+          <article class="scope-card"><h3>Accessibility and human factors</h3><p>Designing environments, tools, and systems around real human variation.</p></article>
+          <article class="scope-card"><h3>Cognitive science</h3><p>Attention, workload, memory, initiation, interruption, and task resumption.</p></article>
+          <article class="scope-card"><h3>Neurodiversity</h3><p>Variation in cognition, regulation, communication, and the conditions that support participation.</p></article>
+          <article class="scope-card"><h3>Systems thinking</h3><p>Interactions between people, environments, institutions, policies, and feedback loops.</p></article>
+          <article class="scope-card"><h3>Lived experience and relational inquiry</h3><p>Knowledge developed through situated experience, collaboration, and shared meaning-making.</p></article>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="faq" aria-labelledby="faq-heading">
+      <div class="section-inner">
+        <div class="section-heading">
+          <p class="eyebrow">Common questions</p>
+          <h2 id="faq-heading">A short orientation.</h2>
+          <p>These answers describe the field as it currently stands. The framework is developing, and its concepts remain open to refinement.</p>
+        </div>
+        <div class="faq-list">
+          <details><summary>What is Access Architecture?</summary><p class="faq-answer">Access Architecture is the study and design of conditions that let preserved ability become usable action. It asks why a person may have an ability but not reliable access to it under particular conditions.</p></details>
+          <details><summary>What does “ability is not access” mean?</summary><p class="faq-answer">It means that being capable of something in one context does not prove that the same capacity will be available on demand, repeatedly, or sustainably in another context.</p></details>
+          <details><summary>Is Access Architecture a diagnosis or treatment model?</summary><p class="faq-answer">No. It is an emerging conceptual and design field. It does not replace clinical assessment, diagnosis, disability determination, or individualized professional support.</p></details>
+          <details><summary>How is this different from accessibility?</summary><p class="faq-answer">Accessibility is a crucial foundation. Access Architecture focuses more specifically on the changing conditions that influence whether a preserved capacity can become usable action, including volatility, interruption, recovery, and accommodation fit.</p></details>
+          <details><summary>Who is this field for?</summary><p class="faq-answer">It is relevant to people navigating fluctuating access, researchers, designers, educators, clinicians, employers, institutions, and anyone trying to understand the gap between capacity and reliable participation.</p></details>
+          <details><summary>Where should I start?</summary><p class="faq-answer">For a plain-language introduction, visit <a href="https://abilityisnotaccess.com/" target="_blank" rel="noopener noreferrer">Ability Is Not Access</a>. For the formal framework and publications, stay here.</p></details>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="relationship" aria-labelledby="relationship-heading">
+      <div class="section-inner">
+        <div class="section-heading">
+          <p class="eyebrow">Two doors into the work</p>
+          <h2 id="relationship-heading">Recognition first. Research next.</h2>
+        </div>
+        <div class="bridge">
+          <article class="bridge-card">
+            <h3>Ability Is Not Access</h3>
+            <p>The relatable, plain-language discovery site. Start there if you want to recognize the experience before
+              learning the formal vocabulary.</p>
+            <p><a href="https://abilityisnotaccess.com/" target="_blank" rel="noopener noreferrer">Visit the discovery site →</a></p>
+          </article>
+          <article class="bridge-card">
+            <h3>Access Architecture</h3>
+            <p>The formal field site for papers, concepts, definitions, methods, and the research ecosystem developing
+              around the distinction.</p>
+              <p>You Are Here</p>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section-inner">
+        <div class="status">
+          <p><strong>Status:</strong> Access Architecture is an emerging interdisciplinary field developed by M. Ian
+            Niad through the Ashfires research ecosystem.</p>
+          <p>The framework is being developed through publications, lived-experience-led inquiry, relational
+            co-authorship, and ongoing conceptual work.</p>
+        </div>
+      </div>
+    </section>
   </main>
+  <footer>
+    <div><span>© 2026 Access Architecture · Part of the Ashfires research ecosystem</span><a
+        href="https://ashfires.com" target="_blank" rel="noopener noreferrer">Ashfires →</a></div>
+  </footer>
+  <script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const primaryNav = document.querySelector('#primary-nav');
+
+    menuToggle.addEventListener('click', () => {
+      const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+      menuToggle.setAttribute('aria-expanded', String(!isOpen));
+      primaryNav.classList.toggle('is-open', !isOpen);
+    });
+
+    primaryNav.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        menuToggle.setAttribute('aria-expanded', 'false');
+        primaryNav.classList.remove('is-open');
+      });
+    });
+
+    const faqItems = document.querySelectorAll('.faq-list details');
+    faqItems.forEach((item) => {
+      item.addEventListener('toggle', () => {
+        if (!item.open) return;
+        faqItems.forEach((otherItem) => {
+          if (otherItem !== item) otherItem.open = false;
+        });
+      });
+    });
+  </script>
 </body>
+
 </html>
