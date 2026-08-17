@@ -12,7 +12,13 @@ https://accessarchitecture.github.io
 
 ## Status
 
-The site presents the field's foundational distinction, initial working vocabulary, and first publication: *Ability Is Not Access*.
+The site presents the field's foundational distinction, initial working vocabulary, first publication, and the Recognition Paradox concept page.
+
+## Key pages
+
+- `papers/ability-is-not-access.html` - complete scholarly paper record
+- `concepts/recognition-paradox.html` - first formal concept page
+- `robots.txt` and `sitemap.xml` - crawl and discovery support
 
 Developed by M. Ian Niad
 Part of the Ashfires research ecosystem.
